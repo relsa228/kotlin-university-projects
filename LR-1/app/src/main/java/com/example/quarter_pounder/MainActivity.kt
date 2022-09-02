@@ -5,6 +5,8 @@ import android.view.View
 import android.widget.EditText
 import android.widget.Spinner
 import androidx.appcompat.app.AppCompatActivity
+import com.example.quarter_pounder.models.UnitSigns
+import com.example.quarter_pounder.services.ConverterHelperService
 import com.example.quarter_pounder.services.UiHelperService
 import com.example.quarter_pounder.ui.main.MainFragment
 
@@ -40,6 +42,10 @@ class MainActivity : AppCompatActivity() {
             R.id.b9 -> inputVal = uiHelperService.inputValidation("9", inputEditText.text.toString());
         }
         inputEditText.setText(inputVal)
+
+        val converterHelperService: ConverterHelperService = ConverterHelperService()
+        converterHelperService.convert(inputEditText, findViewById(R.id.output), findViewById(R.id.InputSpinner),
+            findViewById(R.id.OutputSpinner))
     }
     fun toolBtnOnClick(view: View) {
         val inputEditText: EditText = findViewById(R.id.input);
@@ -48,8 +54,11 @@ class MainActivity : AppCompatActivity() {
         val outputSpin: Spinner = findViewById(R.id.OutputSpinner);
 
         when(view.getId()) {
-            R.id.cleanInput -> inputEditText.setText("0");
-            R.id.switchValues -> uiHelperService.switchValues(inputEditText, outputEditText);
+            R.id.cleanInput -> {
+                inputEditText.setText("0")
+                outputEditText.setText("0")
+            };
+            R.id.switchValues -> uiHelperService.switchValues(inputEditText, outputEditText, inputSpin, outputSpin);
             R.id.copy -> uiHelperService.copyToClipboard(this.applicationContext, inputEditText.text.toString(), outputEditText.text.toString(),
                 inputSpin.selectedItem.toString(), outputSpin.selectedItem.toString());
             R.id.comma -> inputEditText.setText(uiHelperService.inputValidation(".", inputEditText.text.toString()));

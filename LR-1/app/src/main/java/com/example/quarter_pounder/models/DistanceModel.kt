@@ -16,18 +16,18 @@ class DistanceModel {
     val miToYd: Double;
 
     init {
-        meterToIn = 0.0;
-        meterToFt = 0.0;
-        meterToYd = 0.0;
-        meterToMi = 0.0;
+        meterToIn = 39.3700787402;
+        meterToFt = 3.280839895;
+        meterToYd = 1.0936132983;
+        meterToMi = 0.0006213712;
 
-        inToFt = 0.0;
-        inToYd = 0.0;
-        inToMi = 0.0;
+        inToFt = 0.0833333333;
+        inToYd = 0.0277777778;
+        inToMi = 0.0000157828;
 
-        ftToYd = 0.0;
-        ftToMi = 0.0;
+        ftToYd = 0.3333333333;
+        ftToMi = 0.0001893939;
 
-        miToYd = 0.0;
+        miToYd = 1760.0;
     }
 }

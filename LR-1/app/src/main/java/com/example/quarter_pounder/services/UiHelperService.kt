@@ -10,12 +10,19 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.quarter_pounder.R
 
+import com.example.quarter_pounder.models.UnitSigns
+
 class UiHelperService: AppCompatActivity() {
-    public fun switchValues(inputEditText: EditText, outputEditText: EditText) {
-        val inputText: String = inputEditText.text.toString();
+    public fun switchValues(inputEditText: EditText, outputEditText: EditText, inputSpin: Spinner,
+    outputSpin: Spinner) {
+        val tempStr: String = inputEditText.text.toString();
 
         inputEditText.setText(outputEditText.text.toString());
-        outputEditText.setText(inputText);
+        outputEditText.setText(tempStr);
+
+        val tempId: Int = inputSpin.selectedItemId.toInt()
+        inputSpin.setSelection(outputSpin.selectedItemId.toInt(), true)
+        outputSpin.setSelection(tempId, true)
     }
 
     public fun inputValidation(inputNum: String, currentNum: String): String {
@@ -92,9 +99,19 @@ class UiHelperService: AppCompatActivity() {
 
     }
 
-    fun copyToClipboard(context: Context, input: String, output: String, funit: String, sunit: String){
+    fun copyToClipboard(context: Context, input: String, output: String, fUnit: String, sUnit: String) {
+        var funitSign: String = ""
+        var sunitSign: String = ""
+
+        UnitSigns.values().forEach {
+            if (it.nameOfUnit == fUnit)
+                funitSign = it.name
+            if (it.nameOfUnit == sUnit)
+                sunitSign = it.name
+        }
+
         val clipboard = context.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
-        val clip = ClipData.newPlainText("label", "$input $funit = $output $sunit")
+        val clip = ClipData.newPlainText("label", "$input $funitSign = $output $sunitSign")
         clipboard.setPrimaryClip(clip)
 
         Toast.makeText(context, "Результат вычислений скопирован", Toast.LENGTH_SHORT).show()
