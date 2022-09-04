@@ -4,11 +4,14 @@ import android.os.Bundle
 import android.view.View
 import android.widget.EditText
 import android.widget.Spinner
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.example.quarter_pounder.models.UnitSigns
 import com.example.quarter_pounder.services.ConverterHelperService
+import com.example.quarter_pounder.services.TabLayoutHelper
 import com.example.quarter_pounder.services.UiHelperService
 import com.example.quarter_pounder.ui.main.MainFragment
+import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayout.OnTabSelectedListener
 
 
 class MainActivity : AppCompatActivity() {
@@ -22,6 +25,14 @@ class MainActivity : AppCompatActivity() {
                     .replace(R.id.container, MainFragment.newInstance())
                     .commitNow()
         }
+    }
+    override fun onStart() {
+        super.onStart()
+
+        val tabLayoutHelper: TabLayoutHelper = TabLayoutHelper(this.applicationContext, findViewById(R.id.InputSpinner),
+            findViewById(R.id.OutputSpinner));
+        val tabLayout: TabLayout = findViewById(R.id.TabUnits);
+        tabLayout.addOnTabSelectedListener(tabLayoutHelper)
     }
 
     fun numBtnOnClick(view: View) {
@@ -62,18 +73,6 @@ class MainActivity : AppCompatActivity() {
             R.id.copy -> uiHelperService.copyToClipboard(this.applicationContext, inputEditText.text.toString(), outputEditText.text.toString(),
                 inputSpin.selectedItem.toString(), outputSpin.selectedItem.toString());
             R.id.comma -> inputEditText.setText(uiHelperService.inputValidation(".", inputEditText.text.toString()));
-        }
-    }
-
-    fun tabBtnOnClick(view: View) {
-        val inputSpin: Spinner = findViewById(R.id.InputSpinner);
-        val outputSpin: Spinner = findViewById(R.id.OutputSpinner);
-
-        when(view.getId()) {
-            R.id.DistanceItem -> uiHelperService.changeSpinnerList(inputSpin, outputSpin, "distance")
-            R.id.WeightItem -> uiHelperService.changeSpinnerList(inputSpin, outputSpin, "weight")
-            R.id.DataItem -> uiHelperService.changeSpinnerList(inputSpin, outputSpin, "data")
-            R.id.CryptoItem -> uiHelperService.changeSpinnerList(inputSpin, outputSpin, "crypto")
         }
     }
 }

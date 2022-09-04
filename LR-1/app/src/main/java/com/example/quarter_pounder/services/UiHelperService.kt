@@ -55,10 +55,10 @@ class UiHelperService: AppCompatActivity() {
         return currentNum + inputNum;
     }
 
-    fun changeSpinnerList(inputSpin: Spinner, outputSpin: Spinner, tabName: String) {
-        if(tabName == "distance")
-            ArrayAdapter.createFromResource(
-                this,
+    fun changeSpinnerList(inputSpin: Spinner, outputSpin: Spinner, tabId: Int, appContext: Context) {
+        when(tabId) {
+            0 -> ArrayAdapter.createFromResource(
+                appContext,
                 R.array.distance_list,
                 android.R.layout.simple_spinner_item
             ).also { adapter ->
@@ -66,9 +66,8 @@ class UiHelperService: AppCompatActivity() {
                 inputSpin.adapter = adapter
                 outputSpin.adapter = adapter
             };
-        else  if(tabName == "weight")
-            ArrayAdapter.createFromResource(
-                this,
+            1 -> ArrayAdapter.createFromResource(
+                appContext,
                 R.array.weight_list,
                 android.R.layout.simple_spinner_item
             ).also { adapter ->
@@ -76,9 +75,8 @@ class UiHelperService: AppCompatActivity() {
                 inputSpin.adapter = adapter
                 outputSpin.adapter = adapter
             };
-        else  if(tabName == "data")
-            ArrayAdapter.createFromResource(
-                this,
+            2 -> ArrayAdapter.createFromResource(
+                appContext,
                 R.array.data_list,
                 android.R.layout.simple_spinner_item
             ).also { adapter ->
@@ -86,9 +84,9 @@ class UiHelperService: AppCompatActivity() {
                 inputSpin.adapter = adapter
                 outputSpin.adapter = adapter
             };
-        else  if(tabName == "crypto")
-            ArrayAdapter.createFromResource(
-                this,
+
+            3 -> ArrayAdapter.createFromResource(
+                appContext,
                 R.array.cryptocurrency_list,
                 android.R.layout.simple_spinner_item
             ).also { adapter ->
@@ -96,7 +94,7 @@ class UiHelperService: AppCompatActivity() {
                 inputSpin.adapter = adapter
                 outputSpin.adapter = adapter
             };
-
+        }
     }
 
     fun copyToClipboard(context: Context, input: String, output: String, fUnit: String, sUnit: String) {
