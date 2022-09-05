@@ -1,19 +1,17 @@
-package com.example.quarter_pounder.services
+package com.example.quarter_pounder.services.helpers
 
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
-import android.widget.ArrayAdapter
 import android.widget.EditText
 import android.widget.Spinner
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.example.quarter_pounder.R
 
 import com.example.quarter_pounder.models.UnitSigns
 
-class UiHelperService: AppCompatActivity() {
-    public fun switchValues(inputEditText: EditText, outputEditText: EditText, inputSpin: Spinner,
+class UiHelper: AppCompatActivity() {
+    fun switchValues(inputEditText: EditText, outputEditText: EditText, inputSpin: Spinner,
     outputSpin: Spinner) {
         val tempStr: String = inputEditText.text.toString();
 
@@ -25,7 +23,7 @@ class UiHelperService: AppCompatActivity() {
         outputSpin.setSelection(tempId, true)
     }
 
-    public fun inputValidation(inputNum: String, currentNum: String): String {
+    fun inputValidation(inputNum: String, currentNum: String): String {
         if (inputNum[0] == '0') {
             var nullFlag: Boolean = true;
             currentNum.forEach {
@@ -55,51 +53,9 @@ class UiHelperService: AppCompatActivity() {
         return currentNum + inputNum;
     }
 
-    fun changeSpinnerList(inputSpin: Spinner, outputSpin: Spinner, tabId: Int, appContext: Context) {
-        when(tabId) {
-            0 -> ArrayAdapter.createFromResource(
-                appContext,
-                R.array.distance_list,
-                android.R.layout.simple_spinner_item
-            ).also { adapter ->
-                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-                inputSpin.adapter = adapter
-                outputSpin.adapter = adapter
-            };
-            1 -> ArrayAdapter.createFromResource(
-                appContext,
-                R.array.weight_list,
-                android.R.layout.simple_spinner_item
-            ).also { adapter ->
-                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-                inputSpin.adapter = adapter
-                outputSpin.adapter = adapter
-            };
-            2 -> ArrayAdapter.createFromResource(
-                appContext,
-                R.array.data_list,
-                android.R.layout.simple_spinner_item
-            ).also { adapter ->
-                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-                inputSpin.adapter = adapter
-                outputSpin.adapter = adapter
-            };
-
-            3 -> ArrayAdapter.createFromResource(
-                appContext,
-                R.array.cryptocurrency_list,
-                android.R.layout.simple_spinner_item
-            ).also { adapter ->
-                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-                inputSpin.adapter = adapter
-                outputSpin.adapter = adapter
-            };
-        }
-    }
-
     fun copyToClipboard(context: Context, input: String, output: String, fUnit: String, sUnit: String) {
-        var funitSign: String = ""
-        var sunitSign: String = ""
+        var funitSign = ""
+        var sunitSign = ""
 
         UnitSigns.values().forEach {
             if (it.nameOfUnit == fUnit)
