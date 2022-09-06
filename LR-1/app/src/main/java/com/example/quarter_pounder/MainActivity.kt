@@ -3,20 +3,22 @@ package com.example.quarter_pounder
 import android.os.Bundle
 import android.view.View
 import android.widget.EditText
+import android.widget.LinearLayout
 import android.widget.Spinner
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.example.quarter_pounder.models.Random
+import com.example.quarter_pounder.services.database.services.DatabasePushServices
 import com.example.quarter_pounder.services.helpers.ConverterHelper
 import com.example.quarter_pounder.services.helpers.UiHelper
 import com.example.quarter_pounder.services.helpers.listeners.SpinnerHelpListener
 import com.example.quarter_pounder.services.helpers.listeners.TabLayoutHelpListener
+import com.example.quarter_pounder.services.helpers.listeners.TabLongClickListener
 import com.example.quarter_pounder.ui.main.MainFragment
 import com.google.android.material.tabs.TabLayout
 
 
 class MainActivity : AppCompatActivity() {
     private val uiHelper: UiHelper = UiHelper();
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.main_activity)
@@ -28,6 +30,9 @@ class MainActivity : AppCompatActivity() {
     }
     override fun onStart() {
         super.onStart()
+
+        val update: DatabasePushServices = DatabasePushServices()
+        update.dbUpdate(this.applicationContext)
 
         val inputSpinner: Spinner = findViewById(R.id.InputSpinner)
         val outputSpinner: Spinner = findViewById(R.id.OutputSpinner)
@@ -43,12 +48,29 @@ class MainActivity : AppCompatActivity() {
             outputSpinner, inputText, outputText);
         val tabLayout: TabLayout = findViewById(R.id.TabUnits);
         tabLayout.addOnTabSelectedListener(tabLayoutHelpListener)
+        tabLayout.getChildAt(0).setOnLongClickListener {
+            Toast.makeText(this.applicationContext, "tab 0 ", Toast.LENGTH_LONG).show()
+            true
+        }
 
+        val tabs = tabLayout.getChildAt(0) as LinearLayout
 
+        for (i in 0 until tabs.childCount) {
+            when(i){
+                0 -> tabs.getChildAt(0).setOnLongClickListener { true }
+                1 -> tabs.getChildAt(1).setOnLongClickListener { true }
+                2 -> tabs.getChildAt(2).setOnLongClickListener { true }
+                3 -> tabs.getChildAt(3).setOnLongClickListener {
+                    update.dbUpdate(this.applicationContext)
+
+                    val converterHelper = ConverterHelper()
+                    converterHelper.convert(inputText, outputText, inputSpinner, outputSpinner)
+                    true }
+            }
+        }
     }
     fun numBtnOnClick(view: View) {
-        val rnd: Random = Random("fsdd", 21)
-        rnd.save()
+
 
         val inputEditText: EditText = findViewById(R.id.input);
         var inputVal = "";

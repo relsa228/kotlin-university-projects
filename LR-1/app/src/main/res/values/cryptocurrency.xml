@@ -3,6 +3,6 @@
     <string-array name="cryptocurrency_list">
         <item>Ethereum (ETH)</item>
         <item>Litecoin (LTC)</item>
-        <item>Zcash (ZEC)</item>
+        <item>Bitcoin (BTC)</item>
     </string-array>
 </resources>

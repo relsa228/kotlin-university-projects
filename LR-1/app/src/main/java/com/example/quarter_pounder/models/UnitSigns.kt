@@ -3,7 +3,7 @@ package com.example.quarter_pounder.models
 enum class UnitSigns(val nameOfUnit: String) {
     ETH("Ethereum (ETH)"),
     LTC("Litecoin (LTC)"),
-    ZEC("Zcash (ZEC)"),
+    BTC("Bitcoin (BTC)"),
 
     BIT("Биты (bit)"),
     B("Байты (B)"),

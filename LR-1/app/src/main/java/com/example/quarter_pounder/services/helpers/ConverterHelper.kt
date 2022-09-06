@@ -32,7 +32,7 @@ class ConverterHelper {
             fSign == UnitSigns.LB)
             weightConvertHelper(inputNum, outNum, fSign, sSign)
 
-        else if (fSign == UnitSigns.ETH || fSign == UnitSigns.LTC || fSign == UnitSigns.ZEC)
+        else if (fSign == UnitSigns.ETH || fSign == UnitSigns.LTC || fSign == UnitSigns.BTC)
             cryptocurrencyConvertHelper(inputNum, outNum, fSign, sSign)
     }
     private fun distanceConvertHelper(inputNum: EditText, outNum: EditText, fSign: UnitSigns, sSign: UnitSigns) {
@@ -210,14 +210,14 @@ class ConverterHelper {
         val inputStr: String = inputNum.text.toString()
         val inputN: Double = inputStr.toDouble()
 
-        val cryptocurrencyConverter: CryptocurrencyConverter = CryptocurrencyConverter()
+        val cryptocurrencyConverter = CryptocurrencyConverter()
 
         when (fSign) {
             UnitSigns.ETH -> {
                 when (sSign) {
                     UnitSigns.ETH -> outNum.setText(inputStr)
                     UnitSigns.LTC -> outNum.setText(cryptocurrencyConverter.ethToLTC(inputN, true).toString())
-                    UnitSigns.ZEC -> outNum.setText(cryptocurrencyConverter.ethToZEC(inputN, true).toString())
+                    UnitSigns.BTC -> outNum.setText(cryptocurrencyConverter.ethToBTC(inputN, true).toString())
                     else -> {}
                 }
                 return;
@@ -226,16 +226,16 @@ class ConverterHelper {
                 when (sSign) {
                     UnitSigns.ETH -> outNum.setText(cryptocurrencyConverter.ethToLTC(inputN, false).toString())
                     UnitSigns.LTC -> outNum.setText(inputStr)
-                    UnitSigns.ZEC -> outNum.setText(cryptocurrencyConverter.ltcToZEC(inputN, true).toString())
+                    UnitSigns.BTC -> outNum.setText(cryptocurrencyConverter.ltcToBTC(inputN, true).toString())
                     else -> {}
                 }
                 return;
             }
-            UnitSigns.ZEC -> {
+            UnitSigns.BTC -> {
                 when (sSign) {
-                    UnitSigns.BIT -> outNum.setText(cryptocurrencyConverter.ethToZEC(inputN, false).toString())
-                    UnitSigns.B -> outNum.setText(cryptocurrencyConverter.ltcToZEC(inputN, false).toString())
-                    UnitSigns.KB -> outNum.setText(inputStr)
+                    UnitSigns.ETH -> outNum.setText(cryptocurrencyConverter.ethToBTC(inputN, false).toString())
+                    UnitSigns.LTC -> outNum.setText(cryptocurrencyConverter.ltcToBTC(inputN, false).toString())
+                    UnitSigns.BTC -> outNum.setText(inputStr)
                     else -> {}
                 }
                 return;

@@ -1,25 +1,25 @@
 package com.example.quarter_pounder.services.converters
 
-import com.example.quarter_pounder.models.CryptocurrencyModel
+import com.example.quarter_pounder.services.database.services.DatabaseGetServices
 
 class CryptocurrencyConverter {
-    //private val cryptoModel: CryptocurrencyModel = CryptocurrencyModel();
+    private val dbGet = DatabaseGetServices()
 
     fun ethToLTC(ETHorLTC: Double, option: Boolean): Double {
         if(option)
-            return ETHorLTC * 0//cryptoModel.ethToLTC;
-        return ETHorLTC / 0//cryptoModel.ethToLTC;
+            return ETHorLTC * dbGet.getEthToLtc();
+        return ETHorLTC / dbGet.getEthToLtc();
     }
 
-    fun ethToZEC(ETHorZEC: Double, option: Boolean): Double {
+    fun ethToBTC(ETHorBTC: Double, option: Boolean): Double {
         if(option)
-            return ETHorZEC * 0//cryptoModel.ETHtoZEC;
-        return ETHorZEC / 0//cryptoModel.ETHtoZEC;
+            return ETHorBTC * dbGet.getEthToBtc();
+        return ETHorBTC / dbGet.getEthToBtc();
     }
 
-    fun ltcToZEC(LTCorZEC: Double, option: Boolean): Double {
+    fun ltcToBTC(LTCorBTC: Double, option: Boolean): Double {
         if(option)
-            return LTCorZEC * 0//cryptoModel.LTCtoZEC;
-        return LTCorZEC / 0//cryptoModel.LTCtoZEC;
+            return LTCorBTC * dbGet.getLtcToBtc();
+        return LTCorBTC / dbGet.getLtcToBtc();
     }
 }
