@@ -70,4 +70,11 @@ class UiHelper: AppCompatActivity() {
 
         Toast.makeText(context, "Результат вычислений скопирован", Toast.LENGTH_SHORT).show()
     }
+
+    fun deleteCh(textInput: EditText) {
+        val input = textInput.text.toString()
+
+        if (input.length == 1) textInput.setText("0")
+        else textInput.setText(input.dropLast(1))
+    }
 }

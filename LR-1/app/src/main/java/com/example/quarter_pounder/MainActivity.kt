@@ -5,20 +5,21 @@ import android.view.View
 import android.widget.EditText
 import android.widget.LinearLayout
 import android.widget.Spinner
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.quarter_pounder.services.database.services.DatabasePushServices
 import com.example.quarter_pounder.services.helpers.ConverterHelper
 import com.example.quarter_pounder.services.helpers.UiHelper
 import com.example.quarter_pounder.services.helpers.listeners.SpinnerHelpListener
-import com.example.quarter_pounder.services.helpers.listeners.TabLayoutHelpListener
-import com.example.quarter_pounder.services.helpers.listeners.TabLongClickListener
+import com.example.quarter_pounder.services.helpers.listeners.TabSelectHelpListener
 import com.example.quarter_pounder.ui.main.MainFragment
 import com.google.android.material.tabs.TabLayout
 
+private val update = DatabasePushServices()
 
 class MainActivity : AppCompatActivity() {
     private val uiHelper: UiHelper = UiHelper();
+    private val converterHelper = ConverterHelper()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.main_activity)
@@ -30,28 +31,22 @@ class MainActivity : AppCompatActivity() {
     }
     override fun onStart() {
         super.onStart()
-
-        val update: DatabasePushServices = DatabasePushServices()
-        update.dbUpdate(this.applicationContext)
+        update.initDb(this.applicationContext)
 
         val inputSpinner: Spinner = findViewById(R.id.InputSpinner)
         val outputSpinner: Spinner = findViewById(R.id.OutputSpinner)
         val inputText: EditText = findViewById(R.id.input)
         val outputText: EditText = findViewById(R.id.output)
+        val tabLayout: TabLayout = findViewById(R.id.TabUnits);
 
         val spinnerListener = SpinnerHelpListener(inputText, outputText,
             inputSpinner, outputSpinner);
         inputSpinner.onItemSelectedListener = spinnerListener
         outputSpinner.onItemSelectedListener = spinnerListener
 
-        val tabLayoutHelpListener = TabLayoutHelpListener(this.applicationContext, inputSpinner,
+        val tabSelectHelpListener = TabSelectHelpListener(this.applicationContext, inputSpinner,
             outputSpinner, inputText, outputText);
-        val tabLayout: TabLayout = findViewById(R.id.TabUnits);
-        tabLayout.addOnTabSelectedListener(tabLayoutHelpListener)
-        tabLayout.getChildAt(0).setOnLongClickListener {
-            Toast.makeText(this.applicationContext, "tab 0 ", Toast.LENGTH_LONG).show()
-            true
-        }
+        tabLayout.addOnTabSelectedListener(tabSelectHelpListener)
 
         val tabs = tabLayout.getChildAt(0) as LinearLayout
 
@@ -62,22 +57,18 @@ class MainActivity : AppCompatActivity() {
                 2 -> tabs.getChildAt(2).setOnLongClickListener { true }
                 3 -> tabs.getChildAt(3).setOnLongClickListener {
                     update.dbUpdate(this.applicationContext)
-
-                    val converterHelper = ConverterHelper()
                     converterHelper.convert(inputText, outputText, inputSpinner, outputSpinner)
-                    true }
+                    true
+                }
             }
         }
     }
     fun numBtnOnClick(view: View) {
-
-
         val inputEditText: EditText = findViewById(R.id.input);
         var inputVal = "";
         when(view.id) {
             R.id.b0 -> inputVal = uiHelper.inputValidation("0", inputEditText.text.toString());
             R.id.b00 -> inputVal = uiHelper.inputValidation("00", inputEditText.text.toString());
-            R.id.b000 -> inputVal = uiHelper.inputValidation("000", inputEditText.text.toString());
             R.id.b1 -> inputVal = uiHelper.inputValidation("1", inputEditText.text.toString());
             R.id.b2 -> inputVal = uiHelper.inputValidation("2", inputEditText.text.toString());
             R.id.b3 -> inputVal = uiHelper.inputValidation("3", inputEditText.text.toString());
@@ -89,8 +80,6 @@ class MainActivity : AppCompatActivity() {
             R.id.b9 -> inputVal = uiHelper.inputValidation("9", inputEditText.text.toString());
         }
         inputEditText.setText(inputVal)
-
-        val converterHelper = ConverterHelper()
         converterHelper.convert(inputEditText, findViewById(R.id.output), findViewById(R.id.InputSpinner),
             findViewById(R.id.OutputSpinner))
     }
@@ -109,6 +98,10 @@ class MainActivity : AppCompatActivity() {
             R.id.copy -> uiHelper.copyToClipboard(this.applicationContext, inputEditText.text.toString(),
                 outputEditText.text.toString(), inputSpin.selectedItem.toString(), outputSpin.selectedItem.toString());
             R.id.comma -> inputEditText.setText(uiHelper.inputValidation(".", inputEditText.text.toString()));
+            R.id.delete -> {
+                uiHelper.deleteCh(inputEditText)
+                converterHelper.convert(inputEditText, outputEditText, inputSpin, outputSpin)
+            }
         }
     }
 }

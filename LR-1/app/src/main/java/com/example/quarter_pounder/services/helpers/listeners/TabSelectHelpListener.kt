@@ -1,13 +1,15 @@
 package com.example.quarter_pounder.services.helpers.listeners
 
 import android.content.Context
+import android.content.res.Configuration
 import android.widget.ArrayAdapter
 import android.widget.EditText
 import android.widget.Spinner
 import com.example.quarter_pounder.R
 import com.google.android.material.tabs.TabLayout
+import java.security.AccessController.getContext
 
-class TabLayoutHelpListener constructor(appContext: Context, inSpin: Spinner, outSpin: Spinner,
+class TabSelectHelpListener constructor(appContext: Context, inSpin: Spinner, outSpin: Spinner,
                                         inText: EditText, outText: EditText): TabLayout.OnTabSelectedListener {
     private val applicationContext: Context
     private val inputSpinner: Spinner
@@ -42,11 +44,20 @@ class TabLayoutHelpListener constructor(appContext: Context, inSpin: Spinner, ou
 
     private fun changeSpinnerList(inputSpin: Spinner, outputSpin: Spinner, tabId: Int,
                                   appContext: Context) {
+        val nightModeFlags: Int = appContext.resources.configuration.uiMode and
+                Configuration.UI_MODE_NIGHT_MASK
+        var spinner_layout: Int = 0
+
+        when(nightModeFlags) {
+            Configuration.UI_MODE_NIGHT_YES -> spinner_layout = R.layout.custom_spinner_layout_dark
+            Configuration.UI_MODE_NIGHT_NO -> spinner_layout = R.layout.custom_spinner_layout_light
+            Configuration.UI_MODE_NIGHT_UNDEFINED -> spinner_layout = R.layout.custom_spinner_layout_light
+        }
         when(tabId) {
             0 -> ArrayAdapter.createFromResource(
                 appContext,
                 R.array.distance_list,
-                android.R.layout.simple_spinner_item
+                spinner_layout
             ).also { adapter ->
                 adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
                 inputSpin.adapter = adapter
@@ -55,7 +66,7 @@ class TabLayoutHelpListener constructor(appContext: Context, inSpin: Spinner, ou
             1 -> ArrayAdapter.createFromResource(
                 appContext,
                 R.array.weight_list,
-                android.R.layout.simple_spinner_item
+                spinner_layout
             ).also { adapter ->
                 adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
                 inputSpin.adapter = adapter
@@ -64,7 +75,7 @@ class TabLayoutHelpListener constructor(appContext: Context, inSpin: Spinner, ou
             2 -> ArrayAdapter.createFromResource(
                 appContext,
                 R.array.data_list,
-                android.R.layout.simple_spinner_item
+                spinner_layout
             ).also { adapter ->
                 adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
                 inputSpin.adapter = adapter
@@ -74,7 +85,7 @@ class TabLayoutHelpListener constructor(appContext: Context, inSpin: Spinner, ou
             3 -> ArrayAdapter.createFromResource(
                 appContext,
                 R.array.cryptocurrency_list,
-                android.R.layout.simple_spinner_item
+                spinner_layout
             ).also { adapter ->
                 adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
                 inputSpin.adapter = adapter

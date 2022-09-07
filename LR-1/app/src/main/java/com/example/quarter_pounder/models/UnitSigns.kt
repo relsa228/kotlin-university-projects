@@ -10,7 +10,7 @@ enum class UnitSigns(val nameOfUnit: String) {
     KB("Килобайты (KB)"),
     MB("Мегабайты (MB)"),
 
-    M("Метр (m)"),
+    M("Метры (m)"),
     FT("Футы (ft)"),
     IN("Дюймы (in)"),
     YD("Ярды (yd)"),
