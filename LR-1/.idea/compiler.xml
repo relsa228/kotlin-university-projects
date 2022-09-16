@@ -2,7 +2,7 @@
 <project version="4">
   <component name="CompilerConfiguration">
     <bytecodeTargetLevel target="11">
-      <module name="Quarter_pounder.app" target="17" />
+      <module name="Quarter_pounder.app" target="18" />
     </bytecodeTargetLevel>
   </component>
 </project>

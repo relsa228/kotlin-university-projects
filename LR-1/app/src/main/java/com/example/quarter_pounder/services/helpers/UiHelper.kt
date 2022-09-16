@@ -10,7 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 
 import com.example.quarter_pounder.models.UnitSigns
 
-class UiHelper: AppCompatActivity() {
+class UiHelper(private var context: Context) : AppCompatActivity() {
     fun switchValues(inputEditText: EditText, outputEditText: EditText, inputSpin: Spinner,
     outputSpin: Spinner) {
         val tempStr: String = inputEditText.text.toString();
@@ -24,8 +24,21 @@ class UiHelper: AppCompatActivity() {
     }
 
     fun inputValidation(inputNum: String, currentNum: String): String {
+        var mantissaCount = 0;
+        var mantissaFlag = false;
+        currentNum.forEach {
+            if(it == '.')
+                mantissaFlag = true;
+            if(mantissaFlag)
+                mantissaCount++;
+        }
+        if (mantissaCount == 15){
+            Toast.makeText(context, "Допускается не более 15 знаков после запятой", Toast.LENGTH_SHORT).show();
+            return currentNum;
+        }
+
         if (inputNum[0] == '0') {
-            var nullFlag: Boolean = true;
+            var nullFlag = true;
             currentNum.forEach {
                 if (it != '0') {
                     nullFlag = false
@@ -37,7 +50,7 @@ class UiHelper: AppCompatActivity() {
             return currentNum + inputNum;
         };
         else if (inputNum == ".") {
-            var commaFlag: Boolean = false;
+            var commaFlag = false;
             currentNum.forEach {
                 if (it == '.') {
                     commaFlag = true;
@@ -53,7 +66,7 @@ class UiHelper: AppCompatActivity() {
         return currentNum + inputNum;
     }
 
-    fun copyToClipboard(context: Context, input: String, output: String, fUnit: String, sUnit: String) {
+    fun copyToClipboard(input: String, output: String, fUnit: String, sUnit: String) {
         var funitSign = ""
         var sunitSign = ""
 

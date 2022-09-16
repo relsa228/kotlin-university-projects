@@ -17,7 +17,7 @@ import com.google.android.material.tabs.TabLayout
 private val update = DatabasePushServices()
 
 class MainActivity : AppCompatActivity() {
-    private val uiHelper: UiHelper = UiHelper();
+    private lateinit var uiHelper: UiHelper;
     private val converterHelper = ConverterHelper()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -32,6 +32,8 @@ class MainActivity : AppCompatActivity() {
     override fun onStart() {
         super.onStart()
         update.initDb(this.applicationContext)
+
+        this.uiHelper = UiHelper(this.applicationContext);
 
         val inputSpinner: Spinner = findViewById(R.id.InputSpinner)
         val outputSpinner: Spinner = findViewById(R.id.OutputSpinner)
@@ -95,7 +97,7 @@ class MainActivity : AppCompatActivity() {
                 outputEditText.setText("0")
             };
             R.id.switchValues -> uiHelper.switchValues(inputEditText, outputEditText, inputSpin, outputSpin);
-            R.id.copy -> uiHelper.copyToClipboard(this.applicationContext, inputEditText.text.toString(),
+            R.id.copy -> uiHelper.copyToClipboard(inputEditText.text.toString(),
                 outputEditText.text.toString(), inputSpin.selectedItem.toString(), outputSpin.selectedItem.toString());
             R.id.comma -> inputEditText.setText(uiHelper.inputValidation(".", inputEditText.text.toString()));
             R.id.delete -> {
