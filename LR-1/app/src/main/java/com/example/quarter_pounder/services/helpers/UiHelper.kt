@@ -85,9 +85,16 @@ class UiHelper(private var context: Context) : AppCompatActivity() {
     }
 
     fun deleteCh(textInput: EditText) {
-        val input = textInput.text.toString()
+        var input = textInput.text.toString()
 
         if (input.length == 1) textInput.setText("0")
-        else textInput.setText(input.dropLast(1))
+        else {
+            input = input.dropLast(1);
+            if (input.last() == 'E')
+                input = input.dropLast(1);
+            else if (input.last() == '-')
+                input = input.dropLast(2);
+            textInput.setText(input)
+        }
     }
 }
