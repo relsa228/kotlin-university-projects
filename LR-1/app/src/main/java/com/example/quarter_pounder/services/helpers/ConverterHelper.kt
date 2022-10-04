@@ -45,53 +45,73 @@ class ConverterHelper {
             UnitSigns.M -> {
                 when (sSign) {
                     UnitSigns.M -> outNum.setText(inputStr)
-                    UnitSigns.FT -> outNum.setText(distanceConverter.meterToFt(inputN, true).toString())
-                    UnitSigns.IN -> outNum.setText(distanceConverter.meterToIn(inputN, true).toString())
-                    UnitSigns.YD -> outNum.setText(distanceConverter.meterToYd(inputN, true).toString())
-                    UnitSigns.MI -> outNum.setText(distanceConverter.meterToMi(inputN, true).toString())
+                    UnitSigns.FT -> outNum.setText(distanceConverter.meterToFt(inputN, true)
+                        .toBigDecimal().stripTrailingZeros().toPlainString())
+                    UnitSigns.IN -> outNum.setText(distanceConverter.meterToIn(inputN, true)
+                        .toBigDecimal().stripTrailingZeros().toPlainString())
+                    UnitSigns.YD -> outNum.setText(distanceConverter.meterToYd(inputN, true)
+                        .toBigDecimal().stripTrailingZeros().toPlainString())
+                    UnitSigns.MI -> outNum.setText(distanceConverter.meterToMi(inputN, true)
+                        .toBigDecimal().stripTrailingZeros().toPlainString())
                     else -> {}
                 }
                 return;
             }
             UnitSigns.FT -> {
                 when (sSign) {
-                    UnitSigns.M -> outNum.setText(distanceConverter.meterToFt(inputN, false).toString())
+                    UnitSigns.M -> outNum.setText(distanceConverter.meterToFt(inputN, false)
+                        .toBigDecimal().stripTrailingZeros().toPlainString())
                     UnitSigns.FT -> outNum.setText(inputStr)
-                    UnitSigns.IN -> outNum.setText(distanceConverter.inToFt(inputN, false).toString())
-                    UnitSigns.YD -> outNum.setText(distanceConverter.ftToYd(inputN, true).toString())
-                    UnitSigns.MI -> outNum.setText(distanceConverter.ftToMi(inputN, true).toString())
+                    UnitSigns.IN -> outNum.setText(distanceConverter.inToFt(inputN, false)
+                        .toBigDecimal().stripTrailingZeros().toPlainString())
+                    UnitSigns.YD -> outNum.setText(distanceConverter.ftToYd(inputN, true)
+                        .toBigDecimal().stripTrailingZeros().toPlainString())
+                    UnitSigns.MI -> outNum.setText(distanceConverter.ftToMi(inputN, true)
+                        .toBigDecimal().stripTrailingZeros().toPlainString())
                     else -> {}
                 }
                 return;
             }
             UnitSigns.IN -> {
                 when (sSign) {
-                    UnitSigns.M -> outNum.setText(distanceConverter.meterToIn(inputN, false).toString())
-                    UnitSigns.FT -> outNum.setText(distanceConverter.inToFt(inputN, true).toString())
+                    UnitSigns.M -> outNum.setText(distanceConverter.meterToIn(inputN, false)
+                        .toBigDecimal().stripTrailingZeros().toPlainString())
+                    UnitSigns.FT -> outNum.setText(distanceConverter.inToFt(inputN, true)
+                        .toBigDecimal().stripTrailingZeros().toPlainString())
                     UnitSigns.IN -> outNum.setText(inputStr)
-                    UnitSigns.YD -> outNum.setText(distanceConverter.inToYd(inputN, true).toString())
-                    UnitSigns.MI -> outNum.setText(distanceConverter.inToMi(inputN, true).toString())
+                    UnitSigns.YD -> outNum.setText(distanceConverter.inToYd(inputN, true)
+                        .toBigDecimal().stripTrailingZeros().toPlainString())
+                    UnitSigns.MI -> outNum.setText(distanceConverter.inToMi(inputN, true)
+                        .toBigDecimal().stripTrailingZeros().toPlainString())
                     else -> {}
                 }
                 return;
             }
             UnitSigns.YD -> {
                 when (sSign) {
-                    UnitSigns.M -> outNum.setText(distanceConverter.meterToYd(inputN, false).toString())
-                    UnitSigns.FT -> outNum.setText(distanceConverter.ftToYd(inputN, false).toString())
-                    UnitSigns.IN -> outNum.setText(distanceConverter.inToYd(inputN, false).toString())
+                    UnitSigns.M -> outNum.setText(distanceConverter.meterToYd(inputN, false)
+                        .toBigDecimal().stripTrailingZeros().toPlainString())
+                    UnitSigns.FT -> outNum.setText(distanceConverter.ftToYd(inputN, false)
+                        .toBigDecimal().stripTrailingZeros().toPlainString())
+                    UnitSigns.IN -> outNum.setText(distanceConverter.inToYd(inputN, false)
+                        .toBigDecimal().stripTrailingZeros().toPlainString())
                     UnitSigns.YD -> outNum.setText(inputStr)
-                    UnitSigns.MI -> outNum.setText(distanceConverter.miToYd(inputN, false).toString())
+                    UnitSigns.MI -> outNum.setText(distanceConverter.miToYd(inputN, false)
+                        .toBigDecimal().stripTrailingZeros().toPlainString())
                     else -> {}
                 }
                 return;
             }
             UnitSigns.MI -> {
                 when (sSign) {
-                    UnitSigns.M -> outNum.setText(distanceConverter.meterToMi(inputN, false).toString())
-                    UnitSigns.FT -> outNum.setText(distanceConverter.ftToMi(inputN, false).toString())
-                    UnitSigns.IN -> outNum.setText(distanceConverter.inToMi(inputN, false).toString())
-                    UnitSigns.YD -> outNum.setText(distanceConverter.miToYd(inputN, true).toString())
+                    UnitSigns.M -> outNum.setText(distanceConverter.meterToMi(inputN, false)
+                        .toBigDecimal().stripTrailingZeros().toPlainString())
+                    UnitSigns.FT -> outNum.setText(distanceConverter.ftToMi(inputN, false)
+                        .toBigDecimal().stripTrailingZeros().toPlainString())
+                    UnitSigns.IN -> outNum.setText(distanceConverter.inToMi(inputN, false)
+                        .toBigDecimal().stripTrailingZeros().toPlainString())
+                    UnitSigns.YD -> outNum.setText(distanceConverter.miToYd(inputN, true)
+                        .toBigDecimal().stripTrailingZeros().toPlainString())
                     UnitSigns.MI -> outNum.setText(inputStr)
                     else -> {}
                 }
@@ -112,38 +132,50 @@ class ConverterHelper {
             UnitSigns.BIT -> {
                 when (sSign) {
                     UnitSigns.BIT -> outNum.setText(inputStr)
-                    UnitSigns.B -> outNum.setText(dataConverter.bitsToBytes(inputN, true).toString())
-                    UnitSigns.KB -> outNum.setText(dataConverter.bitsToKilobytes(inputN, true).toString())
-                    UnitSigns.MB -> outNum.setText(dataConverter.bitsToMegabytes(inputN, true).toString())
+                    UnitSigns.B -> outNum.setText(dataConverter.bitsToBytes(inputN, true)
+                        .toBigDecimal().stripTrailingZeros().toPlainString())
+                    UnitSigns.KB -> outNum.setText(dataConverter.bitsToKilobytes(inputN, true)
+                        .toBigDecimal().stripTrailingZeros().toPlainString())
+                    UnitSigns.MB -> outNum.setText(dataConverter.bitsToMegabytes(inputN, true)
+                        .toBigDecimal().stripTrailingZeros().toPlainString())
                     else -> {}
                 }
                 return;
             }
             UnitSigns.B -> {
                 when (sSign) {
-                    UnitSigns.BIT -> outNum.setText(dataConverter.bitsToBytes(inputN, false).toString())
+                    UnitSigns.BIT -> outNum.setText(dataConverter.bitsToBytes(inputN, false)
+                        .toBigDecimal().stripTrailingZeros().toPlainString())
                     UnitSigns.B -> outNum.setText(inputStr)
-                    UnitSigns.KB -> outNum.setText(dataConverter.bytesToKilobytes(inputN, true).toString())
-                    UnitSigns.MB -> outNum.setText(dataConverter.bytesToMegabytes(inputN, true).toString())
+                    UnitSigns.KB -> outNum.setText(dataConverter.bytesToKilobytes(inputN, true)
+                        .toBigDecimal().stripTrailingZeros().toPlainString())
+                    UnitSigns.MB -> outNum.setText(dataConverter.bytesToMegabytes(inputN, true)
+                        .toBigDecimal().stripTrailingZeros().toPlainString())
                     else -> {}
                 }
                 return;
             }
             UnitSigns.KB -> {
                 when (sSign) {
-                    UnitSigns.BIT -> outNum.setText(dataConverter.bitsToKilobytes(inputN, false).toString())
-                    UnitSigns.B -> outNum.setText(dataConverter.bytesToKilobytes(inputN, false).toString())
+                    UnitSigns.BIT -> outNum.setText(dataConverter.bitsToKilobytes(inputN, false)
+                        .toBigDecimal().stripTrailingZeros().toPlainString())
+                    UnitSigns.B -> outNum.setText(dataConverter.bytesToKilobytes(inputN, false)
+                        .toBigDecimal().stripTrailingZeros().toPlainString())
                     UnitSigns.KB -> outNum.setText(inputStr)
-                    UnitSigns.MB -> outNum.setText(dataConverter.kilobytesToMegabytes(inputN, true).toString())
+                    UnitSigns.MB -> outNum.setText(dataConverter.kilobytesToMegabytes(inputN, true)
+                        .toBigDecimal().stripTrailingZeros().toPlainString())
                     else -> {}
                 }
                 return;
             }
             UnitSigns.MB -> {
                 when (sSign) {
-                    UnitSigns.BIT -> outNum.setText(dataConverter.bitsToMegabytes(inputN, false).toString())
-                    UnitSigns.B -> outNum.setText(dataConverter.bytesToMegabytes(inputN, false).toString())
-                    UnitSigns.KB -> outNum.setText(dataConverter.kilobytesToMegabytes(inputN, false).toString())
+                    UnitSigns.BIT -> outNum.setText(dataConverter.bitsToMegabytes(inputN, false)
+                        .toBigDecimal().stripTrailingZeros().toPlainString())
+                    UnitSigns.B -> outNum.setText(dataConverter.bytesToMegabytes(inputN, false)
+                        .toBigDecimal().stripTrailingZeros().toPlainString())
+                    UnitSigns.KB -> outNum.setText(dataConverter.kilobytesToMegabytes(inputN, false)
+                        .toBigDecimal().stripTrailingZeros().toPlainString())
                     UnitSigns.MB -> outNum.setText(inputStr)
                     else -> {}
                 }
@@ -164,38 +196,50 @@ class ConverterHelper {
             UnitSigns.KG -> {
                 when (sSign) {
                     UnitSigns.KG -> outNum.setText(inputStr)
-                    UnitSigns.T -> outNum.setText(weightConverter.killogrammsToTonnes(inputN, true).toString())
-                    UnitSigns.OZ -> outNum.setText(weightConverter.killogrammsToOunce(inputN, true).toString())
-                    UnitSigns.LB -> outNum.setText(weightConverter.killogrammsToLb(inputN, true).toString())
+                    UnitSigns.T -> outNum.setText(weightConverter.killogrammsToTonnes(inputN, true)
+                        .toBigDecimal().stripTrailingZeros().toPlainString())
+                    UnitSigns.OZ -> outNum.setText(weightConverter.killogrammsToOunce(inputN, true)
+                        .toBigDecimal().stripTrailingZeros().toPlainString())
+                    UnitSigns.LB -> outNum.setText(weightConverter.killogrammsToLb(inputN, true)
+                        .toBigDecimal().stripTrailingZeros().toPlainString())
                     else -> {}
                 }
                 return;
             }
             UnitSigns.T -> {
                 when (sSign) {
-                    UnitSigns.KG -> outNum.setText(weightConverter.killogrammsToTonnes(inputN, false).toString())
+                    UnitSigns.KG -> outNum.setText(weightConverter.killogrammsToTonnes(inputN, false)
+                        .toBigDecimal().stripTrailingZeros().toPlainString())
                     UnitSigns.T -> outNum.setText(inputStr)
-                    UnitSigns.OZ -> outNum.setText(weightConverter.tonneToOunce(inputN, true).toString())
-                    UnitSigns.LB -> outNum.setText(weightConverter.lbToOunce(inputN, false).toString())
+                    UnitSigns.OZ -> outNum.setText(weightConverter.tonneToOunce(inputN, true)
+                        .toBigDecimal().stripTrailingZeros().toPlainString())
+                    UnitSigns.LB -> outNum.setText(weightConverter.lbToOunce(inputN, false)
+                        .toBigDecimal().stripTrailingZeros().toPlainString())
                     else -> {}
                 }
                 return;
             }
             UnitSigns.OZ -> {
                 when (sSign) {
-                    UnitSigns.KG -> outNum.setText(weightConverter.killogrammsToOunce(inputN, false).toString())
-                    UnitSigns.T -> outNum.setText(weightConverter.tonneToOunce(inputN, true).toString())
+                    UnitSigns.KG -> outNum.setText(weightConverter.killogrammsToOunce(inputN, false)
+                        .toBigDecimal().stripTrailingZeros().toPlainString())
+                    UnitSigns.T -> outNum.setText(weightConverter.tonneToOunce(inputN, true)
+                        .toBigDecimal().stripTrailingZeros().toPlainString())
                     UnitSigns.OZ -> outNum.setText(inputStr)
-                    UnitSigns.LB -> outNum.setText(weightConverter.lbToOunce(inputN, false).toString())
+                    UnitSigns.LB -> outNum.setText(weightConverter.lbToOunce(inputN, false)
+                        .toBigDecimal().stripTrailingZeros().toPlainString())
                     else -> {}
                 }
                 return;
             }
             UnitSigns.LB -> {
                 when (sSign) {
-                    UnitSigns.KG -> outNum.setText(weightConverter.killogrammsToLb(inputN, false).toString())
-                    UnitSigns.T -> outNum.setText(weightConverter.tonneToLb(inputN, false).toString())
-                    UnitSigns.OZ -> outNum.setText(weightConverter.lbToOunce(inputN, true).toString())
+                    UnitSigns.KG -> outNum.setText(weightConverter.killogrammsToLb(inputN, false)
+                        .toBigDecimal().stripTrailingZeros().toPlainString())
+                    UnitSigns.T -> outNum.setText(weightConverter.tonneToLb(inputN, false)
+                        .toBigDecimal().stripTrailingZeros().toPlainString())
+                    UnitSigns.OZ -> outNum.setText(weightConverter.lbToOunce(inputN, true)
+                        .toBigDecimal().stripTrailingZeros().toPlainString())
                     UnitSigns.LB -> outNum.setText(inputStr)
                     else -> {}
                 }
@@ -216,25 +260,31 @@ class ConverterHelper {
             UnitSigns.ETH -> {
                 when (sSign) {
                     UnitSigns.ETH -> outNum.setText(inputStr)
-                    UnitSigns.LTC -> outNum.setText(cryptocurrencyConverter.ethToLTC(inputN, true).toString())
-                    UnitSigns.BTC -> outNum.setText(cryptocurrencyConverter.ethToBTC(inputN, true).toString())
+                    UnitSigns.LTC -> outNum.setText(cryptocurrencyConverter.ethToLTC(inputN, true)
+                        .toBigDecimal().stripTrailingZeros().toPlainString())
+                    UnitSigns.BTC -> outNum.setText(cryptocurrencyConverter.ethToBTC(inputN, true)
+                        .toBigDecimal().stripTrailingZeros().toPlainString())
                     else -> {}
                 }
                 return;
             }
             UnitSigns.LTC -> {
                 when (sSign) {
-                    UnitSigns.ETH -> outNum.setText(cryptocurrencyConverter.ethToLTC(inputN, false).toString())
+                    UnitSigns.ETH -> outNum.setText(cryptocurrencyConverter.ethToLTC(inputN, false)
+                        .toBigDecimal().stripTrailingZeros().toPlainString())
                     UnitSigns.LTC -> outNum.setText(inputStr)
-                    UnitSigns.BTC -> outNum.setText(cryptocurrencyConverter.ltcToBTC(inputN, true).toString())
+                    UnitSigns.BTC -> outNum.setText(cryptocurrencyConverter.ltcToBTC(inputN, true)
+                        .toBigDecimal().stripTrailingZeros().toPlainString())
                     else -> {}
                 }
                 return;
             }
             UnitSigns.BTC -> {
                 when (sSign) {
-                    UnitSigns.ETH -> outNum.setText(cryptocurrencyConverter.ethToBTC(inputN, false).toString())
-                    UnitSigns.LTC -> outNum.setText(cryptocurrencyConverter.ltcToBTC(inputN, false).toString())
+                    UnitSigns.ETH -> outNum.setText(cryptocurrencyConverter.ethToBTC(inputN, false)
+                        .toBigDecimal().stripTrailingZeros().toPlainString())
+                    UnitSigns.LTC -> outNum.setText(cryptocurrencyConverter.ltcToBTC(inputN, false)
+                        .toBigDecimal().stripTrailingZeros().toPlainString())
                     UnitSigns.BTC -> outNum.setText(inputStr)
                     else -> {}
                 }

@@ -1,5 +1,8 @@
 package com.example.quarter_pounder
 
+import android.content.ClipData
+import android.content.ClipboardManager
+import android.content.Context
 import android.os.Bundle
 import android.view.View
 import android.widget.EditText
@@ -40,6 +43,8 @@ class MainActivity : AppCompatActivity() {
         val inputText: EditText = findViewById(R.id.input)
         val outputText: EditText = findViewById(R.id.output)
         val tabLayout: TabLayout = findViewById(R.id.TabUnits);
+
+
 
         val spinnerListener = SpinnerHelpListener(inputText, outputText,
             inputSpinner, outputSpinner);
@@ -86,6 +91,10 @@ class MainActivity : AppCompatActivity() {
             findViewById(R.id.OutputSpinner))
     }
     fun toolBtnOnClick(view: View) {
+        val dataManager: ClipboardManager = this.applicationContext
+            .getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+        var data: ClipData? = dataManager.primaryClip
+
         val inputEditText: EditText = findViewById(R.id.input);
         val outputEditText: EditText = findViewById(R.id.output);
         val inputSpin: Spinner = findViewById(R.id.InputSpinner);
@@ -105,5 +114,9 @@ class MainActivity : AppCompatActivity() {
                 converterHelper.convert(inputEditText, outputEditText, inputSpin, outputSpin)
             }
         }
+    }
+
+    fun onPaste(){
+
     }
 }

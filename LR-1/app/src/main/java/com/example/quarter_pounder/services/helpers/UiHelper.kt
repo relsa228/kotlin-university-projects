@@ -24,6 +24,10 @@ class UiHelper(private var context: Context) : AppCompatActivity() {
     }
 
     fun inputValidation(inputNum: String, currentNum: String): String {
+        if (currentNum.length >= 30){
+            Toast.makeText(context, "Допускается не более 30 символов", Toast.LENGTH_SHORT).show();
+            return currentNum;
+        }
         var mantissaCount = 0;
         var mantissaFlag = false;
         currentNum.forEach {
@@ -32,7 +36,7 @@ class UiHelper(private var context: Context) : AppCompatActivity() {
             if(mantissaFlag)
                 mantissaCount++;
         }
-        if (mantissaCount == 15){
+        if (mantissaCount >= 15){
             Toast.makeText(context, "Допускается не более 15 знаков после запятой", Toast.LENGTH_SHORT).show();
             return currentNum;
         }
@@ -49,7 +53,7 @@ class UiHelper(private var context: Context) : AppCompatActivity() {
                 return "0"
             return currentNum + inputNum;
         };
-        else if (inputNum == ".") {
+        else if (inputNum == "." && currentNum.length < 29) {
             var commaFlag = false;
             currentNum.forEach {
                 if (it == '.') {
@@ -61,6 +65,8 @@ class UiHelper(private var context: Context) : AppCompatActivity() {
                 return currentNum;
             return currentNum + inputNum;
         };
+        else if (inputNum == ".")
+            return currentNum;
         if (currentNum == "0")
             return inputNum;
         return currentNum + inputNum;

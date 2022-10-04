@@ -214,6 +214,7 @@
             android:layout_width="380dp"
             android:layout_height="62dp"
             android:inputType="numberDecimal"
+
             android:ems="10"
             android:id="@+id/output"
             tools:ignore="SpeakableTextPresentCheck"
